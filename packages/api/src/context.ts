@@ -1,15 +1,15 @@
 import { auth } from "@duckmetric/auth";
 
 export type CreateContextOptions = {
-  headers: Headers;
+	headers: Headers;
 };
 
 export async function createContext({ headers }: CreateContextOptions) {
-  const session = await auth.api.getSession({ headers });
-  return {
-    auth: null,
-    session,
-  };
+	const session = await auth.api.getSession({ headers });
+	return {
+		auth: null,
+		session,
+	};
 }
 
 export type Context = Awaited<ReturnType<typeof createContext>>;

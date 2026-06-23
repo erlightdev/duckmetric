@@ -1,24 +1,26 @@
 {
-  "name": "@duckmetric/auth",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {},
-  "dependencies": {
-    "@duckmetric/db": "workspace:*",
-    "@duckmetric/env": "workspace:*",
-    "better-auth": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@duckmetric/config": "workspace:*",
-    "typescript": "catalog:"
-  }
+	"name": "@duckmetric/auth",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {},
+	"dependencies": {
+		"@duckmetric/db": "workspace:*",
+		"@duckmetric/env": "workspace:*",
+		"better-auth": "catalog:",
+		"dotenv": "catalog:",
+		"nodemailer": "^7.0.3",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@duckmetric/config": "workspace:*",
+		"@types/nodemailer": "^7.0.0",
+		"typescript": "catalog:"
+	}
 }

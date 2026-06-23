@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
 import SonnerToaster from "../components/SonnerToaster.jsx";
 
 interface Props {
@@ -20,7 +19,6 @@ const { title = "Duckmetric" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-neutral-950 text-white">
-    <Header />
     <slot />
     <SonnerToaster client:load />
   </body>

@@ -1,10 +1,454 @@
 ---
-import SignUpForm from "../components/SignUpForm.astro";
-import Layout from "../layouts/Layout.astro";
+import AuthLayout from "../layouts/AuthLayout.astro";
 ---
 
-<Layout title="Sign Up - duckmetric">
-  <div class="flex min-h-[calc(100vh-4rem)] items-center justify-center">
-    <SignUpForm />
+<AuthLayout title="Sign Up - Duckmetric">
+  <div class="flex min-h-screen items-center justify-center px-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20">
+          <svg class="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-white">Create your account</h1>
+        <p class="mt-2 text-sm text-neutral-400">
+          Already have an account? <a href="/login" class="text-white font-medium hover:underline cursor-pointer">Sign in</a>
+        </p>
+      </div>
+
+      <!-- Step 1: Full name -->
+      <div id="step-name">
+        <div class="space-y-3 mb-6">
+          <button id="google-btn" type="button" class="flex w-full items-center justify-center gap-3 rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors cursor-pointer">
+            <svg class="h-5 w-5" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+            </svg>
+            Sign up with Google
+          </button>
+          <button id="facebook-btn" type="button" class="flex w-full items-center justify-center gap-3 rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-sm font-medium text-white hover:bg-neutral-800 transition-colors cursor-pointer">
+            <svg class="h-5 w-5" fill="#1877F2" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Sign up with Facebook
+          </button>
+        </div>
+
+        <div class="relative mb-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-neutral-700"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="bg-neutral-950 px-3 text-neutral-500">Or</span>
+          </div>
+        </div>
+
+        <form id="name-form" class="space-y-4">
+          <div>
+            <label for="fullname" class="block text-sm font-medium text-neutral-300 mb-1.5">Full name</label>
+            <input
+              id="fullname"
+              type="text"
+              placeholder="John Doe"
+              autocomplete="name"
+              class="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-white placeholder-neutral-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            <p id="name-error" class="mt-1 text-sm text-red-500 hidden"></p>
+          </div>
+          <button type="submit" class="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-700 transition-colors cursor-pointer">
+            Next
+          </button>
+        </form>
+
+        <p class="mt-6 text-center text-xs text-neutral-500">
+          By signing up, you agree to our <a href="/terms" class="text-white hover:underline cursor-pointer">Terms & Conditions</a> and <a href="/privacy" class="text-white hover:underline cursor-pointer">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- Step 2: Email -->
+      <div id="step-email" class="hidden">
+        <button id="back-to-name" type="button" class="mb-6 flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors cursor-pointer">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          Back
+        </button>
+        <h2 class="text-lg font-semibold text-white mb-1">What's your email?</h2>
+        <p class="text-sm text-neutral-400 mb-6" id="signup-name-display"></p>
+
+        <form id="email-form" class="space-y-4">
+          <div>
+            <label for="signup-email" class="block text-sm font-medium text-neutral-300 mb-1.5">Email address</label>
+            <input
+              id="signup-email"
+              type="email"
+              placeholder="name@email.com"
+              autocomplete="email"
+              class="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-white placeholder-neutral-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            <p id="signup-email-error" class="mt-1 text-sm text-red-500 hidden"></p>
+          </div>
+          <p id="email-form-error" class="text-sm text-red-500 hidden"></p>
+          <button type="submit" id="email-submit" class="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+            Continue
+          </button>
+        </form>
+      </div>
+
+      <!-- Step 3: Email verification OTP -->
+      <div id="step-verify" class="hidden">
+        <a href="/login" class="mb-6 flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors cursor-pointer">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          Back to login
+        </a>
+        <div class="text-center mb-8">
+          <h2 class="text-xl font-bold text-white">Verify your email</h2>
+          <p class="mt-2 text-sm text-neutral-400">Enter the 6-digit code sent to <span id="verify-email-display" class="text-white font-medium"></span></p>
+        </div>
+
+        <form id="verify-form" class="space-y-6">
+          <div class="flex justify-center gap-2">
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+            <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" class="verify-otp-input h-14 w-12 rounded-lg border border-neutral-700 bg-neutral-800/50 text-center text-xl font-semibold text-white focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors" />
+          </div>
+          <p id="verify-form-error" class="text-sm text-red-500 text-center hidden"></p>
+          <div class="flex justify-center">
+            <button type="submit" id="verify-submit" class="w-full max-w-xs rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+              Verify email
+            </button>
+          </div>
+        </form>
+        <div class="mt-6 space-y-3 text-center">
+          <p class="text-sm text-neutral-400">
+            <span id="verify-countdown" class="hidden"></span>
+            <button id="resend-verify" type="button" class="text-white hover:underline disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hidden" disabled>Resend</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4: Optional password -->
+      <div id="step-password" class="hidden">
+        <button id="skip-password" type="button" class="mb-6 flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors cursor-pointer">
+          Skip for now →
+        </button>
+        <h2 class="text-lg font-semibold text-white mb-1">Set your password</h2>
+        <p class="text-sm text-neutral-400 mb-6">Optional—you can continue using email codes instead</p>
+
+        <form id="set-password-form" class="space-y-4">
+          <div>
+            <label for="new-password" class="block text-sm font-medium text-neutral-300 mb-1.5">Password</label>
+            <input
+              id="new-password"
+              type="password"
+              placeholder="At least 8 characters"
+              minlength="8"
+              autocomplete="new-password"
+              class="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-white placeholder-neutral-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            <p id="new-password-error" class="mt-1 text-sm text-red-500 hidden"></p>
+          </div>
+          <div>
+            <label for="confirm-password" class="block text-sm font-medium text-neutral-300 mb-1.5">Confirm password</label>
+            <input
+              id="confirm-password"
+              type="password"
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+              class="w-full rounded-lg border border-neutral-700 bg-neutral-800/50 px-4 py-3 text-white placeholder-neutral-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-colors"
+            />
+            <p id="confirm-password-error" class="mt-1 text-sm text-red-500 hidden"></p>
+          </div>
+          <p id="password-form-error" class="text-sm text-red-500 hidden"></p>
+          <button type="submit" id="set-password-submit" class="w-full rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+            Save password
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
-</Layout>
+</AuthLayout>
+
+<script>
+  import { authClient } from "../lib/auth-client";
+  import { toaster as toast } from "../components/ui/sonner.js";
+
+  const steps = {
+    name: document.getElementById("step-name")!,
+    email: document.getElementById("step-email")!,
+    verify: document.getElementById("step-verify")!,
+    password: document.getElementById("step-password")!,
+  };
+
+  let signupName = "";
+  let signupEmail = "";
+  let verifyCountdownInterval: ReturnType<typeof setInterval> | null = null;
+
+  function showStep(step: "name" | "email" | "verify" | "password") {
+    Object.values(steps).forEach((s) => s.classList.add("hidden"));
+    steps[step].classList.remove("hidden");
+  }
+
+  function validateEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function startVerifyCountdown() {
+    let seconds = 60;
+    const resendBtn = document.getElementById("resend-verify") as HTMLButtonElement;
+    const countdown = document.getElementById("verify-countdown")!;
+    resendBtn.disabled = true;
+    countdown.textContent = `Resend in ${seconds}s`;
+    countdown.classList.remove("hidden");
+    resendBtn.classList.add("hidden");
+
+    verifyCountdownInterval = setInterval(() => {
+      seconds--;
+      if (seconds <= 0) {
+        clearInterval(verifyCountdownInterval!);
+        resendBtn.disabled = false;
+        countdown.classList.add("hidden");
+        resendBtn.classList.remove("hidden");
+      } else {
+        countdown.textContent = `Resend in ${seconds}s`;
+      }
+    }, 1000);
+  }
+
+  // Step 1: Name
+  const nameForm = document.getElementById("name-form") as HTMLFormElement;
+  const fullnameInput = document.getElementById("fullname") as HTMLInputElement;
+  const nameError = document.getElementById("name-error")!;
+  const googleBtn = document.getElementById("google-btn")!;
+  const facebookBtn = document.getElementById("facebook-btn")!;
+
+  nameForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    nameError.classList.add("hidden");
+    const name = fullnameInput.value.trim();
+    if (!name || name.length < 2) {
+      nameError.textContent = "Please enter your full name";
+      nameError.classList.remove("hidden");
+      return;
+    }
+    signupName = name;
+    document.getElementById("signup-name-display")!.textContent = `Signing up as ${name}`;
+    showStep("email");
+  });
+
+  googleBtn.addEventListener("click", () => {
+    authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" });
+  });
+
+  facebookBtn.addEventListener("click", () => {
+    authClient.signIn.social({ provider: "facebook", callbackURL: "/dashboard" });
+  });
+
+  // Step 2: Email
+  const emailForm = document.getElementById("email-form") as HTMLFormElement;
+  const signupEmailInput = document.getElementById("signup-email") as HTMLInputElement;
+  const signupEmailError = document.getElementById("signup-email-error")!;
+  const emailFormError = document.getElementById("email-form-error")!;
+  const emailSubmit = document.getElementById("email-submit") as HTMLButtonElement;
+  const backToName = document.getElementById("back-to-name")!;
+
+  backToName.addEventListener("click", () => showStep("name"));
+
+  emailForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    signupEmailError.classList.add("hidden");
+    emailFormError.classList.add("hidden");
+
+    const email = signupEmailInput.value.trim();
+    if (!validateEmail(email)) {
+      signupEmailError.textContent = "Please enter a valid email address";
+      signupEmailError.classList.remove("hidden");
+      return;
+    }
+
+    emailSubmit.disabled = true;
+    emailSubmit.textContent = "Sending code...";
+    signupEmail = email;
+
+    const { error } = await authClient.emailOtp.sendVerificationOtp({
+      email,
+      type: "sign-in",
+    });
+
+    emailSubmit.disabled = false;
+    emailSubmit.textContent = "Continue";
+
+    if (error) {
+      emailFormError.textContent = error.message || "Failed to send verification code";
+      emailFormError.classList.remove("hidden");
+      return;
+    }
+
+    toast.success("Code sent", {
+      description: `Verification code sent to ${email}`,
+    });
+    document.getElementById("verify-email-display")!.textContent = email;
+    showStep("verify");
+    verifyOtpInputs[0].focus();
+    startVerifyCountdown();
+  });
+
+  // Step 3: Verify OTP
+  const verifyForm = document.getElementById("verify-form") as HTMLFormElement;
+  const verifyOtpInputs = document.querySelectorAll(".verify-otp-input") as NodeListOf<HTMLInputElement>;
+  const verifyFormError = document.getElementById("verify-form-error")!;
+  const verifySubmit = document.getElementById("verify-submit") as HTMLButtonElement;
+  const resendVerify = document.getElementById("resend-verify") as HTMLButtonElement;
+
+  function getVerifyOtpValue(): string {
+    return Array.from(verifyOtpInputs).map((input) => input.value).join("");
+  }
+
+  function setVerifyOtpValue(value: string) {
+    verifyOtpInputs.forEach((input, i) => {
+      input.value = value[i] || "";
+    });
+  }
+
+  verifyOtpInputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+      const target = input;
+      target.value = target.value.replace(/[^0-9]/g, "");
+
+      if (target.value && index < verifyOtpInputs.length - 1) {
+        verifyOtpInputs[index + 1].focus();
+      }
+
+      if (getVerifyOtpValue().length === 6) {
+        verifyForm.requestSubmit();
+      }
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !input.value && index > 0) {
+        verifyOtpInputs[index - 1].focus();
+        verifyOtpInputs[index - 1].value = "";
+      }
+    });
+
+    input.addEventListener("paste", (e) => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData("text").replace(/[^0-9]/g, "").slice(0, 6);
+      setVerifyOtpValue(pasted);
+      if (pasted.length > 0) {
+        verifyOtpInputs[Math.min(pasted.length, verifyOtpInputs.length) - 1].focus();
+      }
+      if (pasted.length === 6) {
+        verifyForm.requestSubmit();
+      }
+    });
+  });
+
+  verifyForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    verifyFormError.classList.add("hidden");
+
+    const otp = getVerifyOtpValue();
+    if (otp.length !== 6) {
+      verifyFormError.textContent = "Please enter the complete 6-digit code";
+      verifyFormError.classList.remove("hidden");
+      return;
+    }
+
+    verifySubmit.disabled = true;
+    verifySubmit.textContent = "Verifying...";
+
+    const { error } = await authClient.signIn.emailOtp({
+      email: signupEmail,
+      otp,
+      name: signupName,
+    });
+
+    if (error) {
+      verifyFormError.textContent = error.message || "Invalid or expired code";
+      verifyFormError.classList.remove("hidden");
+      verifySubmit.disabled = false;
+      verifySubmit.textContent = "Verify email";
+      setVerifyOtpValue("");
+      verifyOtpInputs[0].focus();
+      return;
+    }
+
+    toast.success("Email verified!");
+    showStep("password");
+  });
+
+  resendVerify.addEventListener("click", async () => {
+    resendVerify.disabled = true;
+    const { error } = await authClient.emailOtp.sendVerificationOtp({
+      email: signupEmail,
+      type: "sign-in",
+    });
+    if (!error) {
+      toast.success("Code resent");
+      startVerifyCountdown();
+    }
+  });
+
+  // Step 4: Set password
+  const setPasswordForm = document.getElementById("set-password-form") as HTMLFormElement;
+  const newPasswordInput = document.getElementById("new-password") as HTMLInputElement;
+  const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement;
+  const newPasswordError = document.getElementById("new-password-error")!;
+  const confirmPasswordError = document.getElementById("confirm-password-error")!;
+  const passwordFormError = document.getElementById("password-form-error")!;
+  const setPasswordSubmit = document.getElementById("set-password-submit") as HTMLButtonElement;
+  const skipPassword = document.getElementById("skip-password")!;
+
+  skipPassword.addEventListener("click", () => {
+    toast.success("Account created!");
+    window.location.href = "/dashboard";
+  });
+
+  setPasswordForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    newPasswordError.classList.add("hidden");
+    confirmPasswordError.classList.add("hidden");
+    passwordFormError.classList.add("hidden");
+
+    const password = newPasswordInput.value;
+    const confirm = confirmPasswordInput.value;
+
+    if (password.length < 8) {
+      newPasswordError.textContent = "Password must be at least 8 characters";
+      newPasswordError.classList.remove("hidden");
+      return;
+    }
+
+    if (password !== confirm) {
+      confirmPasswordError.textContent = "Passwords do not match";
+      confirmPasswordError.classList.remove("hidden");
+      return;
+    }
+
+    setPasswordSubmit.disabled = true;
+    setPasswordSubmit.textContent = "Saving...";
+
+    const response = await fetch("/api/set-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+
+    const result = await response.json().catch(() => null);
+    if (!response.ok) {
+      passwordFormError.textContent = result?.error || "Failed to save password";
+      passwordFormError.classList.remove("hidden");
+      setPasswordSubmit.disabled = false;
+      setPasswordSubmit.textContent = "Save password";
+      return;
+    }
+
+    toast.success("Account created!");
+    window.location.href = "/dashboard";
+  });
+</script>
