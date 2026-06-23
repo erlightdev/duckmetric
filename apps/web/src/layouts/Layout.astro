@@ -5,9 +5,10 @@ import SonnerToaster from "../components/SonnerToaster.jsx";
 
 interface Props {
 	title?: string;
+	hideHeader?: boolean;
 }
 
-const { title = "Duckmetric" } = Astro.props;
+const { title = "Duckmetric", hideHeader = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +21,7 @@ const { title = "Duckmetric" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-neutral-950 text-white">
-    <Header />
+    {!hideHeader && <Header />}
     <slot />
     <SonnerToaster client:load />
   </body>
