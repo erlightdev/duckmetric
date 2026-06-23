@@ -13,3 +13,6 @@ url = "https://mcp.docs.astro.build/mcp"
 [mcp_servers.better-auth]
 type = "http"
 url = "https://mcp.inkeep.com/better-auth/mcp"
+
+[mcp_servers.better-auth.tools.ask-question-about-better-auth]
+approval_mode = "approve"
