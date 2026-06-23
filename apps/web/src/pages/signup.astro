@@ -271,6 +271,28 @@ import AuthLayout from "../layouts/AuthLayout.astro";
     }
 
     emailSubmit.disabled = true;
+    emailSubmit.textContent = "Checking...";
+
+    try {
+      const checkRes = await fetch("/api/check-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const checkData = await checkRes.json();
+
+      if (checkData.exists) {
+        toast.error("Already registered", {
+          description: "Please log in instead.",
+        });
+        emailSubmit.disabled = false;
+        emailSubmit.textContent = "Continue";
+        return;
+      }
+    } catch {
+      // Proceed even if check fails
+    }
+
     emailSubmit.textContent = "Sending code...";
     signupEmail = email;
 

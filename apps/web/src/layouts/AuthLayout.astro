@@ -19,6 +19,12 @@ const { title = "Duckmetric" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-neutral-950 text-white">
+    <a href="/" class="fixed top-4 left-4 z-50 flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-colors cursor-pointer">
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </a>
     <slot />
     <SonnerToaster client:load />
   </body>
